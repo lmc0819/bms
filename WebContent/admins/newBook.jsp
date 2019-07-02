@@ -86,14 +86,16 @@
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="firstname" name="bookname">
 					</div>
-					
+				
 				</div>
+				<hr />
 				<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">作者</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="lastname" name="author">
 					</div>
 				</div>
+				<hr />
 				<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">出版社</label>
 					<div class="col-sm-4">
@@ -101,6 +103,7 @@
 					</div>
 				
 				</div>
+				<hr />
 				<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">出版日期</label>
 					<div class="col-sm-4">
@@ -109,31 +112,35 @@
 					</div>
 					
 				</div>
+				<hr />
 				<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">简介</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="lastname" name="intro">
 					</div>
 				</div>
+				<hr />
 					<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">数量</label>
 					<div class="col-sm-4">
 						<input type="number" class="form-control" id="lastname" name="booknum">
 					</div>
 				</div>
+				<hr />
 					<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">位置</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="lastname" name="action">
 					</div>
 				</div>
+				<hr />
 					<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">分类</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" id="lastname" name="category">
 					</div>
 				</div>
-				
+				<hr />
 
 				 
 				<div class="form-group">
@@ -143,6 +150,7 @@
 					</div>
 					
 				</div>
+				<hr />
 
 				<div class="form-group col-sm-3" >
 					<button type="submit" class="btn btn-primary">添加</button>  
