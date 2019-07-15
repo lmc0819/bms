@@ -65,25 +65,10 @@ String sql="select * from(select t1.* ,rownum num from (select * from reader r o
 		
 	}
 
-	@Override
-	public void InsertReader(Reader reader) {
-		String sql="insert into Reader values(null, ?, ?, ?, ?, ?, ?, ?,?)";
-		JDBCutil util=new JDBCutil();
-		Connection con=util.getConn();
-		List<Object> psmts=new ArrayList();
-		psmts.add(reader.getRpassword());
-		psmts.add(reader.getReadername());
-		psmts.add(reader.getSex());
-		psmts.add(reader.getMobile());
-		psmts.add(reader.getDepartment());
-		psmts.add(reader.getSxtime());
-		psmts.add(reader.getBorrownumber());
-		psmts.add(reader.getRemarks());
-		util.updatePreparedStatement(sql,psmts);
-	}
+
 
 	@Override
-	public List<Reader> SelectById(int id) {
+	public List<Reader> SelectByIdList(int id) {
 
 		String sql="select * from reader where readerid=?";
 		 JDBCutil util=new JDBCutil();
@@ -91,13 +76,8 @@ String sql="select * from(select t1.* ,rownum num from (select * from reader r o
         List<Object> psmts=new ArrayList();
         psmts.add(id);
         return  util.queryPreparedStatement(sql,psmts,Reader.class);
-		
-		 
-		
+
 	}
-
-
-
 
 
 	@Override
@@ -136,6 +116,138 @@ String sql="select * from(select t1.* ,rownum num from (select * from reader r o
 	
 		return -1;
 	}
-	
+	//-------读者部分开始--↓↓----↓↓--↓↓----↓↓---↓↓----↓↓----↓↓-----↓↓----↓↓------------------------------------------------------------------
+		@Override
+		public Reader SelectById(int id) {
+
+			String sql="select * from reader where readerid=?";
+			 JDBCutil util=new JDBCutil();
+	        Connection con=util.getConn();
+	        List<Object> psmts=new ArrayList();
+	        psmts.add(id);
+	        List<Reader> list=new ArrayList();
+	        list= util.queryPreparedStatement(sql,psmts,Reader.class);
+	        Reader b=new Reader();
+	        if(list.isEmpty()){
+	        	return null;
+	        }else{       	
+	    		 b=list.get(0);
+	        }		
+			 return b;
+			
+		}
+
+
+
+		@Override
+		public Reader SelectReaderByMobile(long mobile) {
+		   String sql="select * from reader where mobile =?";
+		   JDBCutil util=new JDBCutil();
+	       Connection con=util.getConn();
+	       List<Object> psmts=new ArrayList();
+	       psmts.add(mobile);
+	       List<Reader> list=new ArrayList();
+	       list= util.queryPreparedStatement(sql,psmts,Reader.class);
+	       Reader b=new Reader();
+	       if(list.isEmpty()){
+	       	return null;
+	       }else{       	
+	   		 b=list.get(0);
+	       }		
+			 return b;
+		}
+
+
+
+		@Override
+		public void updatePasswordByMobile(long mobile,String newPwd) {
+			String sql="update reader set rpassword = ? where mobile = ?";
+			JDBCutil util=new JDBCutil();
+			List<Object> psmts=new ArrayList();
+			psmts.add(newPwd);
+			psmts.add(mobile);
+			util.updatePreparedStatement(sql,psmts);
+		}
+
+
+
+		@Override
+		public Reader findReaderByReadername(String readername) {
+		   String sql="select * from reader where readername =?";
+		   JDBCutil util=new JDBCutil();
+	       List<Object> psmts=new ArrayList();
+	       psmts.add(readername);
+	       List<Reader> list=new ArrayList();
+	       list= util.queryPreparedStatement(sql,psmts,Reader.class);
+	       Reader b=new Reader();
+	       if(list==null){
+	         return null;
+	       }else{       	
+	   		 b=list.get(0);
+	   		 return b;
+	       }		
+			
+		}
+
+
+
+		@Override
+		public void updateReader(int readerid, long mobile, String sex, String department, String remarks) {
+			String sql="update reader set mobile= ? ,sex = ?,department = ? ,remarks = ? where readerid = ?";
+			JDBCutil util=new JDBCutil();
+			List psmts=new ArrayList();
+			psmts.add(mobile);
+			psmts.add(sex);
+			psmts.add(department);
+			psmts.add(remarks);
+			psmts.add(readerid);
+			util.updatePreparedStatement(sql,psmts);		
+		}
+
+		@Override
+		public void updatePasswordByReaderId(int readerid, String newpassword) {
+			String sql="update reader set rpassword=? where readerid = ?";
+			JDBCutil util=new JDBCutil();
+			List psmts=new ArrayList();
+			psmts.add(newpassword);
+			psmts.add(readerid);	
+			util.updatePreparedStatement(sql,psmts);	
+		}
+
+		@Override
+		public void InsertReader(Reader reader) {
+			
+			String sql="insert into reader ( rpassword, readername, sex, mobile, department, sxtime, borrownumber, remarks) "
+					+ "values( ?, ?, ?, ?, ?, sysdate, ?,?)";		
+			JDBCutil util=new JDBCutil();
+			Connection con=util.getConn();
+			List<Object> psmts=new ArrayList();
+			psmts.add(reader.getRpassword());
+			psmts.add(reader.getReadername());
+			psmts.add(reader.getSex());
+			psmts.add(reader.getMobile());
+			psmts.add(reader.getDepartment());
+			psmts.add(reader.getBorrownumber());
+			psmts.add(reader.getRemarks());
+			util.updatePreparedStatement(sql,psmts);
+		}
+		/*@Override
+		public void InsertReader(Reader reader) {
+			String sql="insert into Reader values(null, ?, ?, ?, ?, ?, ?, ?,?)";
+			JDBCutil util=new JDBCutil();
+			Connection con=util.getConn();
+			List<Object> psmts=new ArrayList();
+			psmts.add(reader.getRpassword());
+			psmts.add(reader.getReadername());
+			psmts.add(reader.getSex());
+			psmts.add(reader.getMobile());
+			psmts.add(reader.getDepartment());
+			psmts.add(reader.getSxtime());
+			psmts.add(reader.getBorrownumber());
+			psmts.add(reader.getRemarks());
+			util.updatePreparedStatement(sql,psmts);
+		}*/
+	//--读者部分结束↑--读者部分结束↑-读者部分结束↑-读者部分结束↑-读者部分结束↑-读者部分结束↑-读者部分结束↑-读者部分结束↑---------------------------
+
 
 }

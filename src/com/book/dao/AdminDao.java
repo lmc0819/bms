@@ -21,6 +21,7 @@ public interface AdminDao {
 	 */
 	public void UpdateAdmin(Admin admin);
 	
-	
+	public Admin selectAdminByMobile(long mobile);
+	public void updatePasswordByMobile(long mobile,String newPwd);
 	
 }

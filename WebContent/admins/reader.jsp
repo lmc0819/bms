@@ -52,7 +52,7 @@
 					
 					<ul class="nav navbar-nav navbar-right">
 						<li class="active">
-							 <a href="#">欢迎：张三</a>											 
+							 <a href="#">欢迎：${sessionScope.admin.adminname }</a>											 
 						</li>
 						<li class="dropdown">
 									 <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<strong class="caret"></strong></a>

@@ -22,18 +22,6 @@ public class AdminServiceImpl implements AdminService {
 	BookDao bookdao=new BookDaoImpl();
 	BorrowDao borrowdao=new BorrowDaoImpl();
 	ReaderDao readerdao=new ReaderDaoImpl();
-	@Override
-	public boolean AdminLogin(String name, String password) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public Admin SelectInformation(String name) {
-		
-		Admin admin = admindao.SelectByName(name);
-		return admin;
-	}
 
 	@Override
 	public void UpdateAdmin(Admin admin) {
@@ -47,17 +35,7 @@ public class AdminServiceImpl implements AdminService {
 		return books;
 	}
 
-	@Override
-	public List<Book> FuzzyQuery(String name) {
-		List<Book> books = bookdao.SelectByName(name);
-		return books;
-	}
 
-	@Override
-	public List<Book> CategoryQuery(String category) {
-		List<Book> books = bookdao.SelectByCate(category);
-		return books;
-	}
 
 	@Override
 	public List<Borrow> SelectCpBorrow(int cp) {
@@ -77,11 +55,7 @@ public class AdminServiceImpl implements AdminService {
 
 	}
 
-	@Override
-	public void UpdateBorrow(Borrow borrow) {
-		borrowdao.UpdateBorrow(borrow);
-
-	}
+	
 
 	@Override
 	public void UpdateBook(Book book) {
@@ -89,16 +63,7 @@ public class AdminServiceImpl implements AdminService {
 
 	}
 
-	@Override
-	public void InsertBook(Book book) {
-		bookdao.InsertBook(book);
 
-	}
-
-	@Override
-	public void InsertReader(Reader reader) {
-		readerdao.InsertReader(reader);
-	}
 
 	@Override
 	public void DeleteReader(int id) {
@@ -124,7 +89,7 @@ public class AdminServiceImpl implements AdminService {
 			return readerdao.SelectByName(select);
 		}else{
 			int id=Integer.parseInt(select);
-			return readerdao.SelectById(id);
+			return readerdao.SelectByIdList(id);
 		}
 		
 	}
@@ -186,9 +151,9 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public Reader SelectReaderById(int id) {
-		List<Reader> l=new ArrayList();
-		l=readerdao.SelectById(id);
-		return l.get(0);
+		
+		return readerdao.SelectById(id);
+		
 	}
 
 	@Override
@@ -203,4 +168,58 @@ public class AdminServiceImpl implements AdminService {
 		
 	}
 
+	@Override
+	public Admin SelectByName(String adminname) {
+		return admindao.SelectByName(adminname);
+	}
+	@Override
+	public void InsertBook(Book book) {
+		bookdao.InsertBook(book);
+
+	}
+
+	@Override
+	public void InsertReader(Reader reader) {
+		readerdao.InsertReader(reader);
+	}
+	@Override
+	public Admin selectAdminByMobile(long mobile) {
+		
+		return admindao.selectAdminByMobile(mobile);
+	}
+
+	@Override
+	public void updatePasswordByMobile(long mobile, String newPwd) {
+		admindao.updatePasswordByMobile(mobile, newPwd);		
+	}
+	
+/*	@Override
+	public boolean AdminLogin(String name, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Admin SelectInformation(String name) {
+		
+		Admin admin = admindao.SelectByName(name);
+		return admin;
+	}
+	@Override
+	public List<Book> FuzzyQuery(String name) {
+		List<Book> books = bookdao.SelectByName(name);
+		return books;
+	}
+
+	@Override
+	public List<Book> CategoryQuery(String category) {
+		List<Book> books = bookdao.SelectByCate(category);
+		return books;
+	}
+	@Override
+	public void UpdateBorrow(Borrow borrow) {
+		borrowdao.UpdateBorrow(borrow);
+
+	}
+*/
 }

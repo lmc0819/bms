@@ -10,14 +10,14 @@ public class Borrow {
 	private String bookname;
 	private int readerid;
 	private String readername;
-	private Timestamp borrowdate;
-	private Timestamp returndate;
+	private Date borrowdate;
+	private Date returndate;
 	private String isreturn;
 	public Borrow() {
 		super();
 	}
-	public Borrow(int borrowId, int bookId, String bookName, int readerId, String readerName, Timestamp borrowDate,
-			Timestamp returnDate, String isReturn) {
+	public Borrow(int borrowId, int bookId, String bookName, int readerId, String readerName, Date borrowDate,
+			Date returnDate, String isReturn) {
 		super();
 		this.borrowid = borrowId;
 		this.bookid = bookId;
@@ -58,16 +58,16 @@ public class Borrow {
 	public void setReadername(String readerName) {
 		this.readername = readerName;
 	}
-	public Timestamp getBorrowdate() {
+	public Date getBorrowdate() {
 		return borrowdate;
 	}
-	public void setBorrowdate(Timestamp timestamp) {
+	public void setBorrowdate(Date timestamp) {
 		this.borrowdate = timestamp;
 	}
-	public Timestamp getReturndate() {
+	public Date getReturndate() {
 		return returndate;
 	}
-	public void setReturndate(Timestamp returnDate) {
+	public void setReturndate(Date returnDate) {
 		this.returndate = returnDate;
 	}
 	public String getIsreturn() {
