@@ -34,7 +34,7 @@ import com.book.util.JDBCutil;
 @WebServlet("/admin")
 public class AdminController extends BaseServlet {
 	AdminServiceImpl admin=new AdminServiceImpl();
-
+    /*查询所有借阅信息*/
 	public void SelectAllBorrow(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cp =request.getParameter("cp");
 		int num=1;
@@ -50,10 +50,9 @@ public class AdminController extends BaseServlet {
 		request.getRequestDispatcher("admins/borrowRecord.jsp").forward(request, response);
 
 	}
-	
+	  /*查询所有书籍信息*/
 	public void SelectAllBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+
 		String cp =request.getParameter("cp");
 		int num=1;
 		if(cp!=null){
@@ -68,6 +67,7 @@ public class AdminController extends BaseServlet {
 		request.getRequestDispatcher("admins/bookInfo.jsp").forward(request, response);
 
 	}
+	  /*查询所有读书信息*/
 	public void SelectAllReader(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cp =request.getParameter("cp");
 		int num=1;
@@ -83,6 +83,7 @@ public class AdminController extends BaseServlet {
 		request.getRequestDispatcher("admins/reader.jsp").forward(request, response);
 
 	}
+	/*删除用户和用户借阅信息*/
 	public void DeleteReader(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id=Integer.parseInt(request.getParameter("id"));
 	    String name=request.getParameter("name");
@@ -94,24 +95,7 @@ public class AdminController extends BaseServlet {
         response.sendRedirect("admin?act=SelectAllReader");
 
 	}
-	public void SelectReader(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String select=request.getParameter("select");
-		String name=request.getParameter("name");
-		List<Reader> list=new ArrayList();
-		 list=admin.SelectReader(select, name);
-		 request.setAttribute("rs", list);
-		request.getRequestDispatcher("admins/reader.jsp").forward(request, response);
-
-	}public void SelectBorrow(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String value=request.getParameter("value");
-		String name=request.getParameter("name");
-		List<Borrow> list=new ArrayList();
-		 list=admin.SelectBorrows(name, value);
-		 request.setAttribute("bos", list);
-		request.getRequestDispatcher("admins/borrowRecord.jsp").forward(request, response);
-
-	}
-
+	/*删除图书和图书借阅信息*/
 	public void DeleteBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id=Integer.parseInt(request.getParameter("id"));
 	    String name=request.getParameter("name");
@@ -122,19 +106,38 @@ public class AdminController extends BaseServlet {
         response.sendRedirect("admin?act=SelectAllBook");
 
 	}
+	/*用户查询*/
+	public void SelectReader(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String select=request.getParameter("select");
+		String name=request.getParameter("name");
+		List<Reader> list=new ArrayList();
+		 list=admin.SelectReader(select, name);
+		 request.setAttribute("rs", list);
+		request.getRequestDispatcher("admins/reader.jsp").forward(request, response);
+		/*借阅信息查询*/
+	}public void SelectBorrow(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String value=request.getParameter("value");
+		String name=request.getParameter("name");
+		List<Borrow> list=new ArrayList();
+		 list=admin.SelectBorrows(name, value);
+		 request.setAttribute("bos", list);
+		request.getRequestDispatcher("admins/borrowRecord.jsp").forward(request, response);
+
+	}
+
+	/*书籍信息查询*/
 	public void SelectBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name=request.getParameter("name");
 		String value=request.getParameter("value");
-		System.out.print(name+"  "+value);
 		List<Book> list=new ArrayList();
 		list= admin.SelectBook(name, value);
 		 request.setAttribute("bs", list);
 		request.getRequestDispatcher("admins/bookInfo.jsp").forward(request, response);
 
 	}
+	/*修改图书信息*/
 	public void Update(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		request.setCharacterEncoding("UTF-8");
-
 		int id = Integer.parseInt(request.getParameter("bookid"));
 		Book book = admin.SelectBookById(id);
 		book.setBookname(new String(request.getParameter("bookname").getBytes("ISO8859-1"),"UTF-8"));
@@ -188,8 +191,32 @@ public class AdminController extends BaseServlet {
        a.setRemarks(request.getParameter("remarks"));
        admin.UpdateAdmin(a);
        HttpSession session=request.getSession();
-       session.setAttribute("a", a);
+       session.setAttribute("admin", a);
        response.sendRedirect("admins/personInfo.jsp");
+    } public void UpdateAdminPwd(HttpServletRequest request, HttpServletResponse response)throws Exception{
+    	request.setCharacterEncoding("UTF-8");
+        int id=Integer.parseInt(request.getParameter("admid"));
+        Admin a=admin.SelectAdmin(id);
+        String pwd=request.getParameter("pwd");
+        a.setAdmid(id);
+        a.setApassword(pwd);
+        admin.UpdateAdmin(a);
+        HttpSession session=request.getSession();
+        session.setAttribute("admin", a);
+        response.sendRedirect("admins/personInfo.jsp");
+     }
+    public void validate(HttpServletRequest request, HttpServletResponse response)throws Exception{
+    	request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+    	String pwd=request.getParameter("pwd");
+    	HttpSession session =request.getSession();
+    	Admin a=(Admin) session.getAttribute("admin");
+    	
+    	if(pwd.equals(a.getApassword())){
+    		response.getWriter().print("密码正确");
+    	}else{
+    		response.getWriter().print("密码错误");
+    	}
     }
 
 }

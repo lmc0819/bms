@@ -12,11 +12,12 @@ import java.util.List;
 
 import com.book.dao.BorrowDao;
 import com.book.entity.Borrow;
+import com.book.entity.BorrowCount;
 import com.book.entity.Reader;
 import com.book.util.JDBCutil;
 
 public class BorrowDaoImpl implements BorrowDao {
-
+	JDBCutil util=new JDBCutil();
 	@Override
 	public List<Borrow> SelectAllBorrow() {
 		
@@ -26,7 +27,6 @@ public class BorrowDaoImpl implements BorrowDao {
 		return util.queryPreparedStatement(sql,null,Borrow.class);
 		
 
-		
 	}
 
 	@Override
@@ -47,43 +47,6 @@ String sql="select * from(select t1.* ,rownum num from (select * from borrow b o
       
        return   util.queryPreparedStatement(sql,psmts,Borrow.class);
 		 
-	}
-
-	@Override
-	public void InsertBorrow(Borrow borrow) {
-		String sql="insert into borrow values(null, ?, ?, ?, ?, ?, ?, ?)";
-		JDBCutil util=new JDBCutil();
-		Connection con=util.getConn();
-		List<Object> psmts=new ArrayList();
-		psmts.add(borrow.getBookid());
-		psmts.add(borrow.getReaderid());
-		psmts.add(borrow.getBorrowdate());
-		psmts.add(borrow.getReturndate());
-		psmts.add(borrow.getIsreturn());
-		psmts.add(borrow.getBookname());
-		psmts.add(borrow.getReadername());
-		util.updatePreparedStatement(sql,psmts);
-	
-		
-	}
-
-	@Override
-	public void UpdateBorrow(Borrow borrow) {
-		String sql="update borrow set bookid=?,readerid=?,borrowdate=?,returndate=?,isreturn=?,bookname=?,readername=? where borrowid=? ";
-		
-		JDBCutil util=new JDBCutil();
-		
-		List<Object> psmts=new ArrayList();
-		psmts.add(borrow.getBookid());
-		psmts.add(borrow.getReaderid());
-		psmts.add(borrow.getBorrowdate());
-		psmts.add(borrow.getReturndate());
-		psmts.add(borrow.getIsreturn());
-		psmts.add(borrow.getBookname());
-		psmts.add(borrow.getReadername());
-		psmts.add(borrow.getBorrowid());
-		util.updatePreparedStatement(sql,psmts);
-		
 	}
 
 	@Override
@@ -135,7 +98,104 @@ JDBCutil util=new JDBCutil();
 
 		return -1;
 	}
+	//-----读者部分开始↓--读者部分开始↓-读者部分开始↓-读者部分开始↓-读者部分开始↓-读者部分开始↓-读者部分开始↓-读者部分开始↓-读者部分开始↓------------------------------------------------------------------------------
+		@Override
+		public long getTotalpageOfBorrowByReaderId(int readerid) {
+			String sql = "select count(*) count from borrow where readerid ="+readerid;	
+			BorrowCount borrowCount = (BorrowCount) util.queryPreparedStatement(sql, null, BorrowCount.class).get(0);	
+			return borrowCount.getCount();	
+		}
+
+		@Override
+		public List<Borrow> selectPerPageBorrowByReaderId(int currentPage, int pageSize,int readerid) {
+			String sql="select * from (select t1.*,rownum num  "
+					+ "from (select * from borrow e where readerid = "+readerid+" order by borrowid asc) t1"
+					+ " where rownum<="+currentPage*pageSize+") "
+							+ "where num>"+(currentPage-1)*pageSize;
+			List<Borrow> borrows = util.queryPreparedStatement(sql, null, Borrow.class);
+			return borrows;
+		}
+
+		@Override
+		public void subBookNum(int bookid,int count) {
+			String sql = "update book set booknum=booknum-"+ count+" where bookid = "+bookid;
+			util.updatePreparedStatement(sql, null);		
+		}
+
+		@Override
+		public void addBookNum(int bookid, int count) {
+			String sql = "update book set booknum=booknum+"+ count+" where bookid = "+bookid;
+			util.updatePreparedStatement(sql, null);				
+		}
+
+		@Override
+		public List<Borrow> selectUnreturnBorrow(int readerid) {
+			String sql = "select * from borrow where isreturn = '否' and readerid = "+readerid;
+			List<Borrow> unreturns = util.queryPreparedStatement(sql, null, Borrow.class);
+			return unreturns;
+		}
+
+		@Override
+		public long getTotalpageOfUnReturnByReaderId(int readerid) {
+			String sql = "select count(*) count from borrow where isreturn='否' and readerid ="+readerid;
+			BorrowCount borrowCount = (BorrowCount) util.queryPreparedStatement(sql, null, BorrowCount.class).get(0);	
+			return borrowCount.getCount();	
+		}
+
+		@Override
+		public List<Borrow> selectPerPageUnReturnByReaderId(int currentPage, int pageSize, int readerid) {
+			String sql="select * from (select t1.*,rownum num  "
+					+ "from (select * from borrow e where isreturn='否' and readerid = "+readerid+" order by borrowid asc) t1"
+					+ " where rownum<="+currentPage*pageSize+") "
+							+ "where num>"+(currentPage-1)*pageSize;
+			List<Borrow> unreturn = util.queryPreparedStatement(sql, null, Borrow.class);
+			return unreturn;
+		}
+
+		@Override
+		public void returnBook(int borrowid) {
+			String sql = "update borrow set isreturn ='是' where borrowid ="+borrowid;
+			util.updatePreparedStatement(sql, null);	
+		} 
+		
+	//--读者部分结束↑----读者部分结束↑----读者部分结束↑----读者部分结束↑----读者部分结束↑----读者部分结束↑----读者部分结束↑----读者部分结束↑----读者部分结束↑---
+
+	@Override
+	public void InsertBorrow(Borrow borrow) {
+		String sql="insert into borrow values(null, ?, ?, ?, ?, ?, ?, ?)";
+		JDBCutil util=new JDBCutil();
+		Connection con=util.getConn();
+		List<Object> psmts=new ArrayList();
+		psmts.add(borrow.getBookid());
+		psmts.add(borrow.getReaderid());
+		psmts.add(borrow.getBorrowdate());
+		psmts.add(borrow.getReturndate());
+		psmts.add(borrow.getIsreturn());
+		psmts.add(borrow.getBookname());
+		psmts.add(borrow.getReadername());
+		util.updatePreparedStatement(sql,psmts);
 	
-	
+		
+	}
+
+	@Override
+	public void UpdateBorrow(Borrow borrow) {
+		String sql="update borrow set bookid=?,readerid=?,borrowdate=?,returndate=?,isreturn=?,bookname=?,readername=? where borrowid=? ";
+		
+		JDBCutil util=new JDBCutil();
+		
+		List<Object> psmts=new ArrayList();
+		psmts.add(borrow.getBookid());
+		psmts.add(borrow.getReaderid());
+		psmts.add(borrow.getBorrowdate());
+		psmts.add(borrow.getReturndate());
+		psmts.add(borrow.getIsreturn());
+		psmts.add(borrow.getBookname());
+		psmts.add(borrow.getReadername());
+		psmts.add(borrow.getBorrowid());
+		util.updatePreparedStatement(sql,psmts);
+		
+	}
+
 
 }

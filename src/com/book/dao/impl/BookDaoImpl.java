@@ -17,6 +17,7 @@ import java.util.List;
 import com.book.dao.BookDao;
 import com.book.entity.Admin;
 import com.book.entity.Book;
+import com.book.entity.BookCount;
 import com.book.util.JDBCutil;
 
 public class BookDaoImpl implements BookDao {
@@ -351,29 +352,7 @@ public class BookDaoImpl implements BookDao {
 
 	public static void main(String[] args) {
 		BookDao dao=new BookDaoImpl();
-		/*List<Book> list = dao.SelectAllBook();
-		for(Book b:list){
-			System.out.println(b);
-		}
-		java.util.Date date = new java.util.Date();
-		long time = date.getTime();
-		Book book=new Book("鑻辫", "鑼冪敇杩硶", "鍖楀ぇ鍑虹増绀�",new Date(time), "aa", 100, "涓夋ゼ鍖椾晶", "璇█");
-		dao.InsertBook(book);*/
-		/*java.util.Date date = new java.util.Date();
-		long time = date.getTime();
-		List<Book> list = dao.SelectAllBook();
-		for(Book b:list){
-			b.setBooknum(55);
-			b.setPdate(new Date(time));
-			dao.UpdateBook(b);
-			System.out.println(b);
-		}*/
-	//	Book book = dao.SelectById(10012);
-	//	System.out.println(book);
-		/*List<Book> list = dao.SelectByCp(1);
-		for(Book b:list){
-			System.out.println(b);
-		}*/
+	
 		List<Book> list2 = dao.SelectByCate("鏁版嵁搴�");
 		for(Book b:list2){
 			System.out.println(b);
@@ -407,4 +386,57 @@ public class BookDaoImpl implements BookDao {
 	
 		return -1;
 	}
+//	---读者部分开始↓------读者部分开始↓-读者部分开始↓-读者部分开始↓-读者部分开始↓-读者部分开始↓-读者部分开始↓-读者部分开始↓-读者部分开始↓---------------------------------------------
+    /*
+     * 查询每一页的书籍 
+     */
+	@Override
+	public List<Book> selectPerPageBooks(int currentPage, int pageSize) {
+		String sql="select * from (select t1.*,rownum num  "
+				+ "from (select * from book e order by bookid asc) t1"
+				+ " where rownum<="+currentPage*pageSize+") "
+						+ "where num>"+(currentPage-1)*pageSize;
+		List books = util.queryPreparedStatement(sql, null, Book.class);
+		return books;
+	}
+
+	/*
+	 * 按书名查找每一页
+	 */
+	@Override
+	public List<Book> selectPerPageBooksByBookname(int currentPage, int pageSize, String bookname){
+		String sql="select * from (select t1.*,rownum num  "
+				+ "from (select * from book e where bookname like '%"+bookname+"%'  order by bookid asc) t1"
+				+ " where rownum<="+currentPage*pageSize+") "
+						+ "where num>"+(currentPage-1)*pageSize;
+		List books = util.queryPreparedStatement(sql, null, Book.class);
+		return books;
+	}
+
+	@Override
+	public long getTotalpageOfBook() {
+		String sql = "select count(*) count from book";
+		BookCount bookCount = (BookCount) util.queryPreparedStatement(sql, null, BookCount.class).get(0);	
+		return bookCount.getCount();	
+	}
+
+	@Override
+	public long getTotalpageOfBook(String bookname) {
+		String sql = "select count(*) count from book where bookname like '%"+bookname+"%'";
+		BookCount bookCount = (BookCount) util.queryPreparedStatement(sql, null, BookCount.class).get(0);	
+		return bookCount.getCount();	
+	}
+
+	@Override
+	public Book getBookByBookid(int bookid) {
+		Book book=new Book();
+		List params=new ArrayList();
+		params.add(bookid);
+		List list = util.queryPreparedStatement("select * from book where bookid=?", params, Book.class);
+		book=(Book)list.get(0);
+		return book;	
+		
+	}
+//--读者部分结束↑--	读者部分结束↑--	读者部分结束↑--	读者部分结束↑--	读者部分结束↑--	读者部分结束↑--	读者部分结束↑--	读者部分结束↑--	读者部分结束↑--	读者部分结束↑--	
+
 }

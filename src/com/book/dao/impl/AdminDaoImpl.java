@@ -55,5 +55,33 @@ public class AdminDaoImpl implements AdminDao{
 		return admin;
 
 	}
+	@Override
+	public Admin selectAdminByMobile(long mobile) {
+		 String sql="select * from admin where mobile =?";
+		   JDBCutil util=new JDBCutil();
+	       Connection con=util.getConn();
+	       List<Object> psmts=new ArrayList();
+	       psmts.add(mobile);
+	       List<Admin> list=new ArrayList();
+	       list= util.queryPreparedStatement(sql,psmts,Admin.class);
+	       Admin admin = new Admin();
+	       if(list.isEmpty()){
+	       	return null;
+	       }else{       	
+	    	   admin=list.get(0);
+	       }		
+			 return admin;
+	}
+
+	@Override
+	public void updatePasswordByMobile(long mobile, String newPwd) {
+		String sql="update admin set apassword = ? where mobile = ?";
+		JDBCutil util=new JDBCutil();
+		Connection con=util.getConn();
+		List<Object> psmts=new ArrayList();
+		psmts.add(newPwd);
+		psmts.add(mobile);
+		util.updatePreparedStatement(sql,psmts);		
+	}
 
 }

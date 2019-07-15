@@ -52,19 +52,19 @@
 					
 					<ul class="nav navbar-nav navbar-right">
 						<li class="active">
-							 <a href="#">欢迎：张三</a>											 
+							 <a href="#">欢迎：${sessionScope.admin.adminname }</a>											 
 						</li>
 						<li class="dropdown">
 									 <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<strong class="caret"></strong></a>
 									<ul class="dropdown-menu">
 																			
 										<li>
-											 <a href="admin/personInfo.jsp">个人信息修改</a>
+											 <a href="personInfo.jsp">个人信息修改</a>
 										</li>
 										<li class="divider">
 										</li>
 										<li>
-											 <a href="admin/updatePassword.jsp">修改密码</a>
+											 <a href="updatePassword.jsp">修改密码</a>
 										</li>
 										
 										
@@ -80,39 +80,40 @@
 				<strong>个人信息修改：</strong> 
 			</p>
 			<!--表单开始-->
-			<form class="form-horizontal" role="form">
-			<input type="hidden" class="form-control" id="firstname" name="admid" value="${session.a.admid }">
+			<form class="form-horizontal" role="form" action="/BookManager/admin">
+			  <input type="hidden" class="form-control" name="act"  value="UpdateAdmin"/>
+			<input type="hidden" class="form-control"  name="admid" value="${sessionScope.admin.admid }"/>
 				<div class="form-group">
 					<label for="firstname" class="col-sm-2 control-label">管理员姓名</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="firstname" name="adminname" value="${session.a.adminname }">
+						<input type="text" class="form-control" id="firstname" name="adminname" value="${sessionScope.admin.adminname }">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">性别</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="lastname" name="sex" value="${session.a.sex }">
+						<input type="text" class="form-control" id="lastname" name="sex" value="${sessionScope.admin.sex }">
 					</div>
 					
 				</div>
 				<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">电话</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="lastname" name="mobile" value="${session.a.mobile }">
+						<input type="text" class="form-control" id="lastname" name="mobile" value="${sessionScope.admin.mobile }">
 					</div>
 					
 				</div>
 				<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">住址</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="lastname" name="address" value="${session.a.address}">
+						<input type="text" class="form-control" id="lastname" name="address" value="${sessionScope.admin.address}">
 					</div>
 					
 				</div>
 				<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">简介</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="lastname" name="remarks" value="${session.a.remarks }">
+						<input type="text" class="form-control" id="lastname" name="remarks" value="${sessionScope.admin.remarks }">
 					</div>
 				
 				</div>
