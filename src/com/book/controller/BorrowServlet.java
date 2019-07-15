@@ -23,8 +23,7 @@ import com.book.service.impl.BorrowServiceImpl;
 public class BorrowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     BorrowService borrowService = new BorrowServiceImpl();   
-    int currentPage = 1;
-   	int pageSize = 3;
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -55,7 +54,9 @@ public class BorrowServlet extends HttpServlet {
 	
 	//查询未归还的图书（带分页）
 	public void doUnReturnList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		  if(request.getParameter("currentPage")!=null){
+		 int currentPage = 1;
+		 int pageSize = 3;
+		if(request.getParameter("currentPage")!=null){
 			  String cp = request.getParameter("currentPage");	 
 			  currentPage = Integer.parseInt(cp);			 
 		  }
@@ -82,6 +83,8 @@ public class BorrowServlet extends HttpServlet {
 	
 	//借阅信息列表
 	public void doList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{		
+		 int currentPage = 1;
+		 int pageSize = 3;
 	  if(request.getParameter("currentPage")!=null){
 		  String cp = request.getParameter("currentPage");	 
 		  currentPage = Integer.parseInt(cp);			 

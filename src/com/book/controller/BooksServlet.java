@@ -33,8 +33,7 @@ public class BooksServlet extends HttpServlet {
     BookService bookService = new BookServiceImpl();
     ReaderService readerService = new ReaderServiceImpl();
     BorrowService borrowService = new BorrowServiceImpl();		
-    int currentPage = 1;
-	int pageSize = 4;
+   
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -59,7 +58,7 @@ public class BooksServlet extends HttpServlet {
 		}
 	   //借书
 	   public void doBorrow(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		   
+		  
 		   int bookid = Integer.parseInt(request.getParameter("bookid"));
 		   int readerid = Integer.parseInt(request.getParameter("readerid"));
 		   int borrowcount = Integer.parseInt(request.getParameter("borrowcount")) ;//借阅的本数
@@ -103,6 +102,8 @@ public class BooksServlet extends HttpServlet {
 		public void doSearch(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		  String bookname = request.getParameter("bookname");
           System.out.println(bookname);
+          int currentPage = 1;
+      	int pageSize = 4;
 		  if(request.getParameter("currentPage")!=null){
 			  String cp = request.getParameter("currentPage");	 
 			  currentPage = Integer.parseInt(cp);			 
