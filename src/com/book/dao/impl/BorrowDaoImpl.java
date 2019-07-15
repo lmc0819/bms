@@ -162,15 +162,12 @@ JDBCutil util=new JDBCutil();
 
 	@Override
 	public void InsertBorrow(Borrow borrow) {
-		String sql="insert into borrow values(null, ?, ?, ?, ?, ?, ?, ?)";
+		String sql= "insert into borrow values(null,?,?,sysdate,sysdate+30,'否',?, ? )";
 		JDBCutil util=new JDBCutil();
 		Connection con=util.getConn();
 		List<Object> psmts=new ArrayList();
 		psmts.add(borrow.getBookid());
 		psmts.add(borrow.getReaderid());
-		psmts.add(borrow.getBorrowdate());
-		psmts.add(borrow.getReturndate());
-		psmts.add(borrow.getIsreturn());
 		psmts.add(borrow.getBookname());
 		psmts.add(borrow.getReadername());
 		util.updatePreparedStatement(sql,psmts);

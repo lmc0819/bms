@@ -137,22 +137,22 @@ public class AdminController extends BaseServlet {
 	}
 	/*修改图书信息*/
 	public void Update(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		request.setCharacterEncoding("UTF-8");
+	
 		int id = Integer.parseInt(request.getParameter("bookid"));
 		Book book = admin.SelectBookById(id);
-		book.setBookname(new String(request.getParameter("bookname").getBytes("ISO8859-1"),"UTF-8"));
-		book.setAuthor(new String(request.getParameter("author").getBytes("ISO8859-1"),"UTF-8"));
-		book.setPhouse(new String(request.getParameter("phouse").getBytes("ISO8859-1"),"UTF-8"));
+		book.setBookname(request.getParameter("bookname"));
+		book.setAuthor(request.getParameter("author"));
+		book.setPhouse(request.getParameter("phouse"));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dd = sdf.parse(new String(request.getParameter("pdate").getBytes("ISO8859-1"),"UTF-8"));
+		Date dd = sdf.parse(request.getParameter("pdate"));
 		java.sql.Date date = new java.sql.Date(dd.getTime());
 		
 		book.setPdate(date);
-		book.setCategory(new String(request.getParameter("category").getBytes("ISO8859-1"),"UTF-8"));
+		book.setCategory(request.getParameter("category"));
 		book.setBooknum(Integer.parseInt(request.getParameter("booknum")));
-		book.setAction(new String(request.getParameter("action").getBytes("ISO8859-1"),"UTF-8"));
-		book.setIntro(new String(request.getParameter("intro").getBytes("ISO8859-1"),"UTF-8"));
+		book.setAction(request.getParameter("action"));
+		book.setIntro(request.getParameter("intro"));
 		
 		
 		admin.UpdateBook(book);
@@ -160,24 +160,23 @@ public class AdminController extends BaseServlet {
 		response.sendRedirect("/BookManager/admin?act=SelectAllBook");
 	}
 	public void UpdateReader(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		request.setCharacterEncoding("UTF-8");
+		
 
 		int id = Integer.parseInt(request.getParameter("readerid"));
 		Reader r = admin.SelectReaderById(id);
-		r.setReadername(new String(request.getParameter("readername").getBytes("ISO8859-1"),"UTF-8"));
-		r.setRpassword(new String(request.getParameter("rpassword").getBytes("ISO8859-1"),"UTF-8"));
-		r.setSex(new String(request.getParameter("sex").getBytes("ISO8859-1"),"UTF-8"));
-		r.setSex(new String(request.getParameter("sex").getBytes("ISO8859-1"),"UTF-8"));
+		r.setReadername(request.getParameter("readername"));
+		r.setRpassword(request.getParameter("rpassword"));
+		r.setSex(request.getParameter("sex"));
+		r.setSex(request.getParameter("sex"));
 		r.setMobile(Long.parseLong(request.getParameter("mobile")));
-		r.setDepartment(new String(request.getParameter("department").getBytes("ISO8859-1"),"UTF-8"));
+		r.setDepartment(request.getParameter("department"));
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date dd = sdf.parse(new String(request.getParameter("sxtime").getBytes("ISO8859-1"),"UTF-8"));
+		Date dd = sdf.parse(request.getParameter("sxtime"));
 		java.sql.Date date = new java.sql.Date(dd.getTime());
 		r.setSxtime(date);
 		r.setBorrownumber(Integer.parseInt(request.getParameter("borrownumber")));
 		admin.UpdateReader(r);;
-		
 		response.sendRedirect("/BookManager/admin?act=SelectAllReader");
 	}
     public void UpdateAdmin(HttpServletRequest request, HttpServletResponse response)throws Exception{

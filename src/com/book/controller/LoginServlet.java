@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
 		Admin adminInfo = null;
 		//判断用户或者管理员
 		if("用户".equals(type)){	
-		/*	//用户登录开始
+		//用户登录开始
 		readerInfo =readerService.findReaderByReadername(username);	
 			//判断
 			if(readerInfo != null){
@@ -102,7 +102,7 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}	
 			//用户登录结束
-*/		}else{			
+	}else{			
 			//管理员登录开始
 			adminInfo = adminService.SelectByName(username);			
 			//判断

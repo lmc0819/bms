@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter("/readers/*")
+/*@WebFilter("/readers/*")*/
 public class LoginFilter implements Filter {
 
     /**
@@ -35,7 +35,7 @@ public class LoginFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		System.out.println("过滤器执行");
+	/*	System.out.println("过滤器执行");
 		HttpServletRequest req = (HttpServletRequest)request;
 		Object obj = req.getSession().getAttribute("user");
 		if(obj==null){
@@ -43,7 +43,7 @@ public class LoginFilter implements Filter {
 			HttpServletResponse resp = (HttpServletResponse)response;
 			resp.sendRedirect("../login.jsp");
 		}
-		chain.doFilter(req, response);
+		chain.doFilter(req, response);*/
 	}
 
 	/**
