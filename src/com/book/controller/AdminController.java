@@ -140,19 +140,19 @@ public class AdminController extends BaseServlet {
 		request.setCharacterEncoding("UTF-8");
 		int id = Integer.parseInt(request.getParameter("bookid"));
 		Book book = admin.SelectBookById(id);
-		book.setBookname(new String(request.getParameter("bookname").getBytes("ISO8859-1"),"UTF-8"));
-		book.setAuthor(new String(request.getParameter("author").getBytes("ISO8859-1"),"UTF-8"));
-		book.setPhouse(new String(request.getParameter("phouse").getBytes("ISO8859-1"),"UTF-8"));
+		book.setBookname(request.getParameter("bookname"));
+		book.setAuthor(request.getParameter("author"));
+		book.setPhouse(request.getParameter("phouse"));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date dd = sdf.parse(new String(request.getParameter("pdate").getBytes("ISO8859-1"),"UTF-8"));
 		java.sql.Date date = new java.sql.Date(dd.getTime());
 		
 		book.setPdate(date);
-		book.setCategory(new String(request.getParameter("category").getBytes("ISO8859-1"),"UTF-8"));
+		book.setCategory(request.getParameter("category"));
 		book.setBooknum(Integer.parseInt(request.getParameter("booknum")));
-		book.setAction(new String(request.getParameter("action").getBytes("ISO8859-1"),"UTF-8"));
-		book.setIntro(new String(request.getParameter("intro").getBytes("ISO8859-1"),"UTF-8"));
+		book.setAction(request.getParameter("action"));
+		book.setIntro(request.getParameter("intro"));
 		
 		
 		admin.UpdateBook(book);
