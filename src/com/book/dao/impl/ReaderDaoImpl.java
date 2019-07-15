@@ -180,7 +180,8 @@ String sql="select * from(select t1.* ,rownum num from (select * from reader r o
 	       List<Reader> list=new ArrayList();
 	       list= util.queryPreparedStatement(sql,psmts,Reader.class);
 	       Reader b=new Reader();
-	       if(list==null){
+	       
+	       if(list.isEmpty()){
 	         return null;
 	       }else{       	
 	   		 b=list.get(0);

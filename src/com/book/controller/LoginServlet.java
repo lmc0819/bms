@@ -93,12 +93,12 @@ public class LoginServlet extends HttpServlet {
 						request.getRequestDispatcher("booksServlet?act=search").forward(request, response);					
 					}					
 				}else{
-					request.getSession().setAttribute("errorMsg", "用户名或者密码错误，请检查!");
+					request.setAttribute("errorMsg", "用户名或者密码错误，请检查!");
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				}
 				
 			}else{
-				request.getSession().setAttribute("errorMsg", "用户不存在!请注册");
+				request.setAttribute("errorMsg", "用户不存在!请注册");
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}	
 			//用户登录结束
@@ -154,16 +154,7 @@ public class LoginServlet extends HttpServlet {
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}	
 			//管理员登录结束
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+
 		}	
 		
 		System.out.println(readerInfo);	

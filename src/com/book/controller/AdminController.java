@@ -217,6 +217,10 @@ public class AdminController extends BaseServlet {
     		response.getWriter().print("密码错误");
     	}
     }
+    public void quit(HttpServletRequest request, HttpServletResponse response)throws Exception{
+    	request.getSession().removeAttribute("admin");
+		response.sendRedirect("login.jsp");
+    }
 
 }
 

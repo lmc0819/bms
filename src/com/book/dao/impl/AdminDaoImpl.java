@@ -22,10 +22,15 @@ public class AdminDaoImpl implements AdminDao{
 		List params=new ArrayList();
 		params.add(name);
 		List list = util.queryPreparedStatement("select * from ADMIN where adminname=?", params, Admin.class);
-		admin = (Admin)list.get(0);
 		util.close();	
-		return admin;
-
+		 if(list.isEmpty()){
+	         return null;
+	       }else{       	
+	   		
+	   		 return admin = (Admin)list.get(0);
+	       }
+		
+	
 	}
 
 	@Override

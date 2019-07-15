@@ -133,7 +133,11 @@
 										<li>
 											 <a href="updatePassword.jsp">修改密码</a>
 										</li>
-										
+											<li class="divider">
+										</li>
+										<li>
+											 <a href="/BookManager/admin?act=quit">退出</a>
+										</li>
 										
 									</ul>
 					</li>
