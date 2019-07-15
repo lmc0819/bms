@@ -9,7 +9,16 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath }/bootstrap-3.3.7/css/bootstrap.min.css" />
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-2.2.3.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-3.3.7/js/bootstrap.min.js"></script>	
-	</head>
+	<style type="text/css">
+		img:hover{
+		     transform: scale(4,4);
+		}
+		td{
+		text-align:center;
+		valign:center;
+		}
+		</style>	
+		</head>
 	<body>
 <div class="container">
 		
@@ -116,8 +125,8 @@
 			  <c:forEach items="${books }" var="item">
 			    <div class="col-sm-6 col-md-3">
 			        <div class="thumbnail">
-			            <img src="${item.photo }"
-			                 alt="通用的占位符缩略图">
+			            <img class="img-thumbnail"as width="80px" alt="" src="/img/${item.photo}">
+			                
 			            <div class="caption">
 			                <h3 style="color:black">${item.bookname }</h3>
 			                <p ><em style="color:blue">图书简介：</em>${item.intro }</p>			              

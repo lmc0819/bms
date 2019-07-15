@@ -140,6 +140,7 @@ public class AdminController extends BaseServlet {
 	
 		int id = Integer.parseInt(request.getParameter("bookid"));
 		Book book = admin.SelectBookById(id);
+		
 		book.setBookname(request.getParameter("bookname"));
 		book.setAuthor(request.getParameter("author"));
 		book.setPhouse(request.getParameter("phouse"));
