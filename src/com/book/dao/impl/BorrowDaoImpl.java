@@ -31,7 +31,7 @@ public class BorrowDaoImpl implements BorrowDao {
 
 	@Override
 	public List<Borrow> SelectByCp(int cp) {
-String sql="select * from(select t1.* ,rownum num from (select * from borrow b order by borrowid desc) t1 where rownum<="+cp*10+") where rownum>"+(cp-1)*10;
+String sql="select * from(select t1.* ,rownum num from (select * from borrow b order by borrowid desc) t1 where rownum<="+cp*10+") where num>"+(cp-1)*10;
           JDBCutil util=new JDBCutil();
           Connection con=util.getConn();
           return util.queryPreparedStatement(sql,null,Borrow.class);

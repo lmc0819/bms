@@ -12,15 +12,21 @@
 		<script type="text/javascript" src="bootstrap-3.3.7/js/bootstrap.min.js"></script>	
 		
 		<style type="text/css">
+		 table{
+      width:1200px;
+       table-layout:fixed;
+      }
+
+
 		img:hover{
-		     transform: scale(2,2);
+		     transform: scale(10,10);
 		}
 		td{
 		text-align:center;
 		valign:center;
 		}
 		</style>
-		<%
+			<%
 		String mess = (String) session.getAttribute("mess");
 		if (mess == null|| mess.equals("")){		
 			}		
@@ -159,7 +165,7 @@
 						<th>
 							简介
 						</th>
-						<th>
+						<th style="width:210px">
 							操作
 						</th>
 					</tr>
@@ -171,18 +177,19 @@
 									
 									<td name="bookid">${b.bookid }</td>
 									<td name="bookname">${b.bookname }</td>
-									<td name="photo"> <img class="img-thumbnail" alt="" src="${b.photo}"> </td>
+									<td name="photo"> <img class="img-thumbnail"as width="80px" alt="" src="/img/${b.photo}"> </td>
 									<td name="author">${b.author }</td>
 									<td name="phouse">${b.phouse }</td>
 									<td name="pdate"><fmt:formatDate  value="${b.pdate }" pattern="yyyy-MM-dd"/></td>
 									<td name="category">${b.category }</td>
 									<td name="booknum">${b.booknum }</td>
 									<td name="action">${b.action }</td>
-									<td name="intro">${b.intro }</td>
+									<td name="intro" Style="overflow: hidden; word-break: keep-all; white-space:nowrap;text-overflow:ellipsis">${b.intro }</td>
 									<td>
 										<c:set var="index" value="${index+1}" /> 		
 										<button type="button" class="btn btn-primary" id="modal-751906" href="#modal-container-751906"  data-toggle="modal" onclick="update(${index-1})">修改</button>
 										<button type="button" class="btn btn-danger" onclick="del(${b.bookid })">删除</button>
+										<button type="button" class="btn btn-danger" id="modal-751907" href="#modal-container-751907"  data-toggle="modal" onclick="Info(${index-1})">简介</button>
 									</td>
 								</tr>
 								
@@ -203,6 +210,49 @@
 		</div>
 	</div>
 </div>
+
+
+
+<!--弹出层-->
+       <div class="modal fade" id="modal-container-751907" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">
+							简介信息
+						</h4>
+					</div>
+					
+			
+		                    <div class="form-group">
+		                        <label for="message-text" class="control-label"></label>
+		                       <!--  <input type="text" class="form-control" id="recipient-name7" name="intro"> -->
+		                        <textarea rows="" cols=""  class="form-control" id="intro" name="intro"></textarea>
+		                    </div>
+		                    <div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button> 
+								
+							</div>
+					</div>
+					
+				</div>
+	
+			</div>
+	
+
+		<!--弹出层结束-->
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -251,8 +301,8 @@
 		                    </div>
 		                    <div class="form-group">
 		                        <label for="message-text" class="control-label">简介:</label>
-		                        <textarea rows="5" cols="" class="form-control" id="recipient-name7" name="intro"></textarea>
 		                       <!--  <input type="text" class="form-control" id="recipient-name7" name="intro"> -->
+		                        <textarea rows="" cols=""  class="form-control" id="recipient-name7" name="intro"></textarea>
 		                    </div>
 		                    <div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button> 
@@ -296,6 +346,10 @@
         		document.getElementById("recipient-name7").value=intro;
         		document.getElementById("recipient-name8").value=bookid;
     
+        	}
+        	function Info(i){
+        		var intro=document.getElementsByName("intro")[i].innerHTML;
+        		document.getElementById("intro").value=intro;
         	}
         </script>
         

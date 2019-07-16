@@ -38,12 +38,13 @@ public class AdminDaoImpl implements AdminDao{
 	
 		List params=new ArrayList();
 		params.add(0,admin.getAdminname());
-		params.add(1, admin.getSex());
-		params.add(2, admin.getMobile());
-		params.add(3, admin.getAddress());
-		params.add(4, admin.getRemarks());
-		params.add(5, admin.getAdmid());
-		util.updatePreparedStatement("update admin set adminname=?,sex=?,mobile=?,address=?,remarks=? where admid=?", params);
+		params.add(1,admin.getApassword());
+		params.add(2, admin.getSex());
+		params.add(3, admin.getMobile());
+		params.add(4, admin.getAddress());
+		params.add(5, admin.getRemarks());
+		params.add(6, admin.getAdmid());
+		util.updatePreparedStatement("update admin set adminname=?,apassword=?,sex=?,mobile=?,address=?,remarks=? where admid=?", params);
 		util.close();
 	}
 	

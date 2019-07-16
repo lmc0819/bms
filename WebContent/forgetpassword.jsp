@@ -208,7 +208,7 @@
 		  var wait=60;
 		  function time(obj){
 		    if(wait==0){
-		      $("#getCode").removeAttr("disabled");
+		      $("#getCode").attr("class","layui-btn layui-btn-normal");
 		      $("#getCode").val("重新获取");
 		      wait=60;
 		    }else{
