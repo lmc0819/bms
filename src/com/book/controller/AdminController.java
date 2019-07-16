@@ -200,6 +200,7 @@ public class AdminController extends BaseServlet {
         int id=Integer.parseInt(request.getParameter("admid"));
         Admin a=admin.SelectAdmin(id);
         String pwd=request.getParameter("pwd");
+        System.out.printf("密码"+pwd);
         a.setAdmid(id);
         a.setApassword(pwd);
         admin.UpdateAdmin(a);

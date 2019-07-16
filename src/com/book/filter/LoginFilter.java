@@ -8,17 +8,19 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet Filter implementation class EncodeFilter
+ * Servlet Filter implementation class LoginFilter
  */
-@WebFilter("/*")
-public class EncodeFilter implements Filter {
+@WebFilter("/readers/*")
+public class LoginFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public EncodeFilter() {
+    public LoginFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -33,11 +35,15 @@ public class EncodeFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
-		request.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charset=utf-8");
-		chain.doFilter(request, response);
+		System.out.println("过滤器执行");
+		HttpServletRequest req = (HttpServletRequest)request;
+		Object obj = req.getSession().getAttribute("readerInfo");
+		if(obj==null){
+			//用户尚未登录，转到login.jsp
+			HttpServletResponse resp = (HttpServletResponse)response;
+			resp.sendRedirect("../login.jsp");
+		}
+		chain.doFilter(req, response);
 	}
 
 	/**

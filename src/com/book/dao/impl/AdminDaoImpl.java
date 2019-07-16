@@ -44,7 +44,7 @@ public class AdminDaoImpl implements AdminDao{
 		params.add(4, admin.getAddress());
 		params.add(5, admin.getRemarks());
 		params.add(6, admin.getAdmid());
-		util.updatePreparedStatement("update admin set adminname=?,apassword=?,sex=?,mobile=?,address=?,remarks=? where admid=?", params);
+		util.updatePreparedStatement("update admin set adminname=?,apassword=?, sex=?,mobile=?,address=?,remarks=? where admid=?", params);
 		util.close();
 	}
 	

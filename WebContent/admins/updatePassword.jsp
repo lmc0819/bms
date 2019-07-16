@@ -69,7 +69,7 @@
 					//这是在IE7以前的版本中
 					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 				} catch (e) {
-					alert("对不起，您的浏览器不支持xmlHttpRequest对象");
+					alert("对不去，您的浏览器不支持xmlHttpRequest对象");
 				}
 			}
 		}
@@ -189,8 +189,7 @@
 				<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">请再次输入新密码：</label>
 					<div class="col-sm-4">
-						<input type="password" class="form-control" id="lastname" 
-							name="pwd"   placeholder="请再次输入新密码" onblur="check(this)">
+						<input type="password" class="form-control" id="lastname" name="pwd"   placeholder="请再次输入新密码" onblur="check(this)">
 					</div>
 					<span id="chec"></span>
 				</div>
