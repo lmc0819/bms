@@ -52,7 +52,7 @@ public class ReturnBookServlet extends HttpServlet {
 		borrowDao.returnBook(borrowid);		
 		//将库存的数的数量加一
 		borrowDao.addBookNum(bookid, 1);
-		request.setAttribute("msg", "还书成功！");
+		request.getSession().setAttribute("returnMsg", "还书成功！");
 		//转发至还书页面
 		request.getRequestDispatcher("borrowServlet?act=unReturnList").forward(request, response);		
 	}

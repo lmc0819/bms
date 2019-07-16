@@ -113,6 +113,12 @@ public class ReaderServiceImpl implements ReaderService {
 	    readerDao.InsertReader(reader);
 	}
 
+	@Override
+	public void addReaderBorrowNum(int readerid) {
+		readerDao.addReaderBorrowNum(readerid);
+		
+	}
+
 	
 
 }

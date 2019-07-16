@@ -35,7 +35,8 @@ public interface ReaderDao {
 		public void updatePasswordByMobile(long mobile,String newPwd);
 		//根据手机号查找用户
 		public Reader SelectReaderByMobile(long mobile);
-	 
+		//增加用户的借阅次数
+		public void addReaderBorrowNum(int readerid);
 	//----读者部分结束-↑↑------读者部分--↑↑---↑↑---↑↑-读者部分-----↑↑-----读者部分----读者部分-----↑↑---↑↑--↑↑---↑↑---↑↑---------↑↑---------↑↑---↑↑----↑↑---↑↑---------↑↑-----------------------------------------------------
 		
 }	

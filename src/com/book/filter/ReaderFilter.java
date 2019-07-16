@@ -14,13 +14,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-/*@WebFilter("/readers/*")*/
-public class LoginFilter implements Filter {
+@WebFilter("/readers/*")
+public class ReaderFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public LoginFilter() {
+    public ReaderFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -35,15 +35,15 @@ public class LoginFilter implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-	/*	System.out.println("过滤器执行");
+		System.out.println("过滤器执行");
 		HttpServletRequest req = (HttpServletRequest)request;
-		Object obj = req.getSession().getAttribute("user");
+		Object obj = req.getSession().getAttribute("readerInfo");
 		if(obj==null){
 			//用户尚未登录，转到login.jsp
 			HttpServletResponse resp = (HttpServletResponse)response;
 			resp.sendRedirect("../login.jsp");
 		}
-		chain.doFilter(req, response);*/
+		chain.doFilter(req, response);
 	}
 
 	/**

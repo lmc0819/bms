@@ -75,6 +75,8 @@ public class BooksServlet extends HttpServlet {
 			for(int i=0;i<borrowcount;i++){
 				//插入借阅表
 		        borrowService.InsertBorrow(borrow);
+		        //增加读者借阅的次数
+		        readerService.addReaderBorrowNum(readerid);
 			}	     
 	        //库存图书的数量减少
 	        borrowService.subBookNum(book.getBookid(), borrowcount);

@@ -248,6 +248,15 @@ String sql="select * from(select t1.* ,rownum num from (select * from reader r o
 			psmts.add(reader.getRemarks());
 			util.updatePreparedStatement(sql,psmts);
 		}*/
+		
+		@Override
+		public void addReaderBorrowNum(int readerid) {
+			String sql = "update reader set borrownumber=borrownumber+1 where readerid = ?";
+			JDBCutil util = new JDBCutil();
+			List psmts = new ArrayList();		
+			psmts.add(readerid);
+			util.updatePreparedStatement(sql, psmts);		
+		}
 	//--读者部分结束↑--读者部分结束↑-读者部分结束↑-读者部分结束↑-读者部分结束↑-读者部分结束↑-读者部分结束↑-读者部分结束↑---------------------------
 
 

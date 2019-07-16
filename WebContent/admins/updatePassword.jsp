@@ -69,13 +69,28 @@
 					//这是在IE7以前的版本中
 					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
 				} catch (e) {
-					alert("对不去，您的浏览器不支持xmlHttpRequest对象");
+					alert("对不起，您的浏览器不支持xmlHttpRequest对象");
 				}
 			}
 		}
 		return xmlhttp;
 	}
 </script>
+	<%
+		String mess = (String) session.getAttribute("mess");
+		if (mess == null|| mess.equals("")){		
+			}		
+			else {
+		%>
+		<script type="text/javascript">
+		        alert("<%=mess%>");
+		</script>		
+		<%
+		  session.setAttribute("mess", "");
+		%>
+		<%
+			}
+		%>
 </head>
 	<body>
 	<div class="container">

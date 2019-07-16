@@ -10,6 +10,21 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath }/js/jquery-2.2.3.min.js"></script>
 		<script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-3.3.7/js/bootstrap.min.js"></script>	
 	</head>
+	<%
+			String mess = (String) session.getAttribute("returnMsg");
+			if (mess == null|| mess.equals("")){		
+			}		
+			else {
+		%>
+		<script type="text/javascript">
+		        alert("<%=mess%>");
+		</script>		
+		<%
+		  session.setAttribute("returnMsg", "");
+		%>
+		<%
+			}
+		%>
 	<body>
 <div class="container">
 	

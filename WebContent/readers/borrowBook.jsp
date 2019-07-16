@@ -11,7 +11,7 @@
 		<script type="text/javascript" src="${pageContext.request.contextPath }/bootstrap-3.3.7/js/bootstrap.min.js"></script>	
 	<style type="text/css">
 		img:hover{
-		     transform: scale(4,4);
+		     transform: scale(1.5,1.5);
 		}
 		td{
 		text-align:center;
@@ -29,7 +29,7 @@
 	<br />
 	<br />
 	<div class="row clearfix">
-		<div class="col-md-12 column">
+		<!-- <div class="col-md-12 column">
 			<div class="alert alert-dismissable alert-info">
 				 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 				<h4>
@@ -38,7 +38,7 @@
 				<strong>Warning!</strong> Best check yo self, you're not looking too good. <a href="#" class="alert-link">alert link</a>
 				<strong>Warning!</strong> Best check yo self, you're not looking too good. <a href="#" class="alert-link">alert link</a>
 			</div>
-		</div>
+		</div> -->
 	</div>
 			<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
 				<div class="navbar-header">
@@ -125,7 +125,7 @@
 			  <c:forEach items="${books }" var="item">
 			    <div class="col-sm-6 col-md-3">
 			        <div class="thumbnail">
-			            <img class="img-thumbnail"as width="80px" alt="" src="/img/${item.photo}">
+			            <img class="img-thumbnail"  alt="" src="${item.photo}">
 			                
 			            <div class="caption">
 			                <h3 style="color:black">${item.bookname }</h3>

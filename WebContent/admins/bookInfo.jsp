@@ -13,13 +13,28 @@
 		
 		<style type="text/css">
 		img:hover{
-		     transform: scale(10,10);
+		     transform: scale(2,2);
 		}
 		td{
 		text-align:center;
 		valign:center;
 		}
 		</style>
+		<%
+		String mess = (String) session.getAttribute("mess");
+		if (mess == null|| mess.equals("")){		
+			}		
+			else {
+		%>
+		<script type="text/javascript">
+		        alert("<%=mess%>");
+		</script>		
+		<%
+		  session.setAttribute("mess", "");
+		%>
+		<%
+			}
+		%>
 	</head>
 	<body>
 	<div class="container">
@@ -156,7 +171,7 @@
 									
 									<td name="bookid">${b.bookid }</td>
 									<td name="bookname">${b.bookname }</td>
-									<td name="photo"> <img class="img-thumbnail"as width="80px" alt="" src="/img/${b.photo}"> </td>
+									<td name="photo"> <img class="img-thumbnail" alt="" src="${b.photo}"> </td>
 									<td name="author">${b.author }</td>
 									<td name="phouse">${b.phouse }</td>
 									<td name="pdate"><fmt:formatDate  value="${b.pdate }" pattern="yyyy-MM-dd"/></td>
@@ -236,7 +251,8 @@
 		                    </div>
 		                    <div class="form-group">
 		                        <label for="message-text" class="control-label">简介:</label>
-		                        <input type="text" class="form-control" id="recipient-name7" name="intro">
+		                        <textarea rows="5" cols="" class="form-control" id="recipient-name7" name="intro"></textarea>
+		                       <!--  <input type="text" class="form-control" id="recipient-name7" name="intro"> -->
 		                    </div>
 		                    <div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">取消</button> 

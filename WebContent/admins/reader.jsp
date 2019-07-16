@@ -9,8 +9,24 @@
 		<link rel="stylesheet" href="bootstrap-3.3.7/css/bootstrap.min.css" />
 		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
 		<script type="text/javascript" src="bootstrap-3.3.7/js/bootstrap.min.js"></script>	
+		<%
+		String mess = (String) session.getAttribute("mess");
+		if (mess == null|| mess.equals("")){		
+			}		
+			else {
+		%>
+		<script type="text/javascript">
+		        alert("<%=mess%>");
+		</script>		
+		<%
+		  session.setAttribute("mess", "");
+		%>
+		<%
+			}
+		%>
 	</head>
 	<body>
+	
 	<div class="container">
 	<div class="row clearfix">
 		<div class="col-md-12 column">

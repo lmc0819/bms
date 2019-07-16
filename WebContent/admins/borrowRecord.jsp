@@ -59,12 +59,12 @@
 									<ul class="dropdown-menu">
 																			
 										<li>
-											 <a href="admins/personInfo.jsp">个人信息修改</a>
+											 <a href="personInfo.jsp">个人信息修改</a>
 										</li>
 										<li class="divider">
 										</li>
 										<li>
-											 <a href="admins/updatePassword.jsp">修改密码</a>
+											 <a href="updatePassword.jsp">修改密码</a>
 										</li>
 											<li class="divider">
 										</li>

@@ -24,6 +24,8 @@ public interface ReaderService {
 	public Reader SelectReaderByMobile(long mobile);
 		
 	public Reader SelectById(int id);	
+	
+	public void addReaderBorrowNum(int readerid);
 //--读者部分结束↑----读者部分结束↑----读者部分结束↑----读者部分结束↑----读者部分结束↑----读者部分结束↑----读者部分结束↑--	
 	
 	
