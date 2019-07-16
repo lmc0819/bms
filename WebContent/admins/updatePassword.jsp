@@ -76,6 +76,21 @@
 		return xmlhttp;
 	}
 </script>
+	<%
+		String mess = (String) session.getAttribute("mess");
+		if (mess == null|| mess.equals("")){		
+			}		
+			else {
+		%>
+		<script type="text/javascript">
+		        alert("<%=mess%>");
+		</script>		
+		<%
+		  session.setAttribute("mess", "");
+		%>
+		<%
+			}
+		%>
 </head>
 	<body>
 	<div class="container">
@@ -174,8 +189,7 @@
 				<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">请再次输入新密码：</label>
 					<div class="col-sm-4">
-						<input type="password" class="form-control" id="lastname" 
-							name="pwd"   placeholder="请再次输入新密码" onblur="check(this)">
+						<input type="password" class="form-control" id="lastname" name="pwd"   placeholder="请再次输入新密码" onblur="check(this)">
 					</div>
 					<span id="chec"></span>
 				</div>

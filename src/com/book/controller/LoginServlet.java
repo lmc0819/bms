@@ -116,7 +116,8 @@ public class LoginServlet extends HttpServlet {
 						//密码正确，添加cookie
 						
 						if("true".equals(remember)){
-						   Cookie cookie1 = new Cookie("username",request.getParameter("userId"));
+							 String uname = URLEncoder.encode(username,"utf-8");
+							 Cookie cookie1 = new Cookie("username",uname);
 						   Cookie cookie2 = new Cookie("password",password);
 						   Cookie cookie3 = new Cookie("remember","true");
 						   cookie1.setMaxAge(60*60);

@@ -1,6 +1,7 @@
 package com.book.filter;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -14,13 +15,13 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter("/readers/*")
-public class LoginFilter implements Filter {
+@WebFilter("/admins/*")
+public class AdminFilter implements Filter {
 
     /**
      * Default constructor. 
      */
-    public LoginFilter() {
+    public AdminFilter() {
         // TODO Auto-generated constructor stub
     }
 
@@ -37,7 +38,7 @@ public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		System.out.println("过滤器执行");
 		HttpServletRequest req = (HttpServletRequest)request;
-		Object obj = req.getSession().getAttribute("readerInfo");
+		Object obj = req.getSession().getAttribute("admin");
 		if(obj==null){
 			//用户尚未登录，转到login.jsp
 			HttpServletResponse resp = (HttpServletResponse)response;
@@ -54,3 +55,4 @@ public class LoginFilter implements Filter {
 	}
 
 }
+

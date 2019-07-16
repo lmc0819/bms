@@ -120,7 +120,8 @@
 				<div class="form-group">
 					<label for="lastname" class="col-sm-2 control-label">简介</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="lastname" name="intro">
+						<!-- <input type="textarea" class="form-control" id="lastname" name="intro"> -->
+						<textarea class="form-control" id="lastname" name="intro" rows="" cols="" ></textarea>
 					</div>
 				</div>
 				<hr />

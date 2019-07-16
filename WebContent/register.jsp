@@ -114,8 +114,8 @@
 </body>
 
 <script>
-
-	function checkUsername(){	 
+var xmlhttp;
+	 function checkUsername(){	 
 		var username = $("#username").val().trim();
 		//写ajax判断用户名
 		if(username.length==0){
@@ -126,7 +126,7 @@
 		$.ajax({
 			url:"${pageContext.request.contextPath }/readerServlet?act=validateUsername",
 		    data:{"username":username},
-		    type:"post",
+		    type:"get",
 		    dataType:"text",
 		    success:function(result){	
 		    	 //alert(result);
@@ -144,8 +144,10 @@
 		})
 		
 		return true;
-	}
+	} 
 
+
+	
 	 function checkPassword(){
 		var password = $("#password").val().trim();
     	 if(password.length>18 || password.length<6 ){   		

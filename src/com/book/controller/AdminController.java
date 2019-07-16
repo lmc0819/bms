@@ -92,6 +92,7 @@ public class AdminController extends BaseServlet {
 		    }
        
         admin.DeleteReader(id);
+        request.getSession().setAttribute("mess","删除成功");
         response.sendRedirect("admin?act=SelectAllReader");
 
 	}
@@ -103,6 +104,7 @@ public class AdminController extends BaseServlet {
         admin.DeleteBorrow(name, id);
 	    }
 	    admin.DeleteBook(id);
+	    request.getSession().setAttribute("mess","删除成功");
         response.sendRedirect("admin?act=SelectAllBook");
 
 	}
@@ -156,7 +158,7 @@ public class AdminController extends BaseServlet {
 		
 		
 		admin.UpdateBook(book);
-		
+		request.getSession().setAttribute("mess","修改成功");
 		response.sendRedirect("/BookManager/admin?act=SelectAllBook");
 	}
 	public void UpdateReader(HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -166,8 +168,7 @@ public class AdminController extends BaseServlet {
 		Reader r = admin.SelectReaderById(id);
 		r.setReadername(request.getParameter("readername"));
 		r.setRpassword(request.getParameter("rpassword"));
-		r.setSex(request.getParameter("sex"));
-		r.setSex(request.getParameter("sex"));
+		r.setSex(request.getParameter("sex"));	
 		r.setMobile(Long.parseLong(request.getParameter("mobile")));
 		r.setDepartment(request.getParameter("department"));
 
@@ -176,7 +177,8 @@ public class AdminController extends BaseServlet {
 		java.sql.Date date = new java.sql.Date(dd.getTime());
 		r.setSxtime(date);
 		r.setBorrownumber(Integer.parseInt(request.getParameter("borrownumber")));
-		admin.UpdateReader(r);;
+		admin.UpdateReader(r);
+	    request.getSession().setAttribute("mess","修改成功");
 		response.sendRedirect("/BookManager/admin?act=SelectAllReader");
 	}
     public void UpdateAdmin(HttpServletRequest request, HttpServletResponse response)throws Exception{
@@ -191,17 +193,20 @@ public class AdminController extends BaseServlet {
        admin.UpdateAdmin(a);
        HttpSession session=request.getSession();
        session.setAttribute("admin", a);
+       request.getSession().setAttribute("mess","修改成功");
        response.sendRedirect("admins/personInfo.jsp");
     } public void UpdateAdminPwd(HttpServletRequest request, HttpServletResponse response)throws Exception{
     	request.setCharacterEncoding("UTF-8");
         int id=Integer.parseInt(request.getParameter("admid"));
         Admin a=admin.SelectAdmin(id);
         String pwd=request.getParameter("pwd");
+        System.out.printf("密码"+pwd);
         a.setAdmid(id);
         a.setApassword(pwd);
         admin.UpdateAdmin(a);
         HttpSession session=request.getSession();
         session.setAttribute("admin", a);
+        request.getSession().setAttribute("mess","修改成功");
         response.sendRedirect("admins/personInfo.jsp");
      }
     public void validate(HttpServletRequest request, HttpServletResponse response)throws Exception{
